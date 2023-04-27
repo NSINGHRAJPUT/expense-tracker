@@ -1,0 +1,16 @@
+.signup-form{
+    display: grid;
+}
+.container{
+    width: 50%;
+    margin: 0% 30% 0% 25%;
+}
+.signup-form input{
+    border-radius: 20px;
+    height: 150%;
+}
+.signup-form button{
+    height: 200%;
+    background-color: rgba(green, green, green, 0.5);
+    border-radius: 20px;
+}
