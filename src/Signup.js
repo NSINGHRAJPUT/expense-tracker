@@ -1,6 +1,6 @@
 import { useRef, useState } from "react"
 import './Signup.css'
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () =>{
     const [signup, setSignup] = useState(true);
@@ -59,6 +59,7 @@ const Signup = () =>{
                 <input type="password" ref={password}></input><br/>
                 {signup && <label>Confirm Password</label>}
                 {signup && <input type="password" ref={confirmPassword}></input>}<br/>
+                {!signup && <Link to='/passwordreset'>Forgot Password</Link>}
                 <button type="Submit" >{signup ? "Sign Up" : "Sign In"}</button>
             </form>
             <br/><br/><br/>

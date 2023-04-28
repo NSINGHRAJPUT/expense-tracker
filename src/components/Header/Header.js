@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () =>{
@@ -10,11 +10,14 @@ const Header = () =>{
         nav('/')
     }
 
-    return <header className='header'>
+    return <div>
+    <header className='header'>
         <h2>Expense Tracker </h2>
-        {!token && <Link to='/signup'>Sign In</Link>}
+        {!token && <Link to='/'>Sign In</Link>}
         {token &&<button onClick={logoutHandler}>LogOut</button>}
     </header>
+    <section><Outlet/></section>
+    </div>
 }
 
 export default Header
