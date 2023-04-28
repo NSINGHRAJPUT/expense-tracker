@@ -15,6 +15,7 @@ const Header = () =>{
         <h2>Expense Tracker </h2>
         {!token && <Link to='/'>Sign In</Link>}
         {token &&<button onClick={logoutHandler}>LogOut</button>}
+        {token && <Link to='/expense'>Expense app</Link>}
     </header>
     <section><Outlet/></section>
     </div>

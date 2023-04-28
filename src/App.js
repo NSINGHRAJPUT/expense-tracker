@@ -1,14 +1,15 @@
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import './App.css';
-import Signup from './Signup';
+import Signup from './components/User/Signup';
 import Home from './Home';
-import UpdateProfile from './UpdateProfile';
-import Profile from './Profile';
-import Email from './Email';
+import UpdateProfile from './components/User/UpdateProfile';
+import Profile from './components/User/Profile';
+import Email from './components/User/Email';
 import Header from './components/Header/Header';
 import Error from './components/Error/Error';
-import PasswordReset from './PasswordReset';
+import PasswordReset from './components/User/PasswordReset';
+import Expense from './components/Expenses/Expense';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,8 @@ const router = createBrowserRouter([
       {path:'/home', element:<Home/>},
       {path:'/profile', element : <Profile/>},
       {path: '/email', element : <Email />},
-      {path: '/passwordreset', element : <PasswordReset/>}
+      {path: '/passwordreset', element : <PasswordReset/>},
+      {path: '/expense' , element : <Expense/>}
     ]
   }
   ])
