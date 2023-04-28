@@ -3,7 +3,7 @@ import './Home.css'
 const Home = () =>{
     return <div className='home'>
         <h4>Welcome to the Expense Tracker app</h4>
-        <h5>Your Profile is Incomplete. <Link to='/profile'>Complete Now</Link></h5>
+        <h5>Your Profile is Incomplete. <Link to='/updateprofile'>Complete Now</Link></h5>
     </div>
 }
 

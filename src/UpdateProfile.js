@@ -1,9 +1,11 @@
 import { useRef } from 'react';
 import './UpdateProfile.css'
+import { useNavigate } from 'react-router-dom';
 
 const UpdateProfile = () =>{
     const name = useRef();
     const url = useRef();
+    const nav = useNavigate();
 
     const profileHandler = (e) =>{
         e.preventDefault();
@@ -23,7 +25,10 @@ const UpdateProfile = () =>{
             }
         }
         ).then(res=>res.json())
-        .then(data=>console.log(data))
+        .then(data=>{
+            localStorage.setItem('data',JSON.stringify(data))
+            nav('/profile')
+        })
         .catch(err=>alert(err))
     }
 
