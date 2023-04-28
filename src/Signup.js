@@ -43,6 +43,7 @@ const Signup = () =>{
             }
         ).then(res=>res.json())
         .then(data=>{
+                localStorage.setItem('token',data.idToken)
                 nav('/home')        
             console.log(data,'Sign In Successfull')})
         .catch(err=>alert(err))  
