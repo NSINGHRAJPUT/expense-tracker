@@ -1,0 +1,9 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    height: 5%;
+}
+.header button{
+    height: 200%;
+    align-items: center;
+}
