@@ -27,7 +27,7 @@ const UpdateProfile = () =>{
         ).then(res=>res.json())
         .then(data=>{
             localStorage.setItem('data',JSON.stringify(data))
-            nav('/profile')
+            nav('/home')
         })
         .catch(err=>alert(err))
     }

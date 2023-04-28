@@ -5,12 +5,14 @@ import Signup from './Signup';
 import Home from './Home';
 import UpdateProfile from './UpdateProfile';
 import Profile from './Profile';
+import Email from './Email';
 
 const router = createBrowserRouter([
   {path:'/home',element:<Home/>},
-  {path:'/signup', element:<Signup/>},
+  {path:'/', element:<Signup/>},
   {path: '/updateprofile', element:<UpdateProfile/>},
-  {path: '/profile', element : <Profile />}
+  {path: '/profile', element : <Profile />},
+  {path : '/email' , element : <Email/>}
 ])
 function App() {
   return (
