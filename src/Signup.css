@@ -1,16 +1,38 @@
+body{
+  background-image: url('https://mcdn.wallpapersafari.com/medium/92/18/VMjfq7.jpg');
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .signup-form{
     display: grid;
+    color: blueviolet;
 }
 .container{
     width: 50%;
-    margin: 0% 30% 0% 25%;
+    margin: 5% 30% 0% 23%;
+    background: rgba(0,0,0,0.1);
+    padding: 2%;
+    padding-bottom: 5%;
+    border-radius: 20px;
+    font-weight: 700;
 }
 .signup-form input{
     border-radius: 20px;
     height: 150%;
 }
 .signup-form button{
-    height: 200%;
-    background-color: rgba(green, green, green, 0.5);
+    height: 80%;
+    width: 50%;
+    background: rgba(0,0,0,0.2);
+    color: blueviolet;
+    border: 2px solid rgb(111, 4, 146);
     border-radius: 20px;
+    margin-top: 5%;
+    margin-left: 25%;
+    font-weight: 700;
+}
+h2{
+    color: blueviolet;
 }
