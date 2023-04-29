@@ -1,5 +1,6 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Expense.css';
+import ExpenseDisplay from './ExpenseDisplay';
 
 let DUMMY_EXPENSES=[];
 
@@ -7,7 +8,29 @@ const Expense = () =>{
     const [exp,setExp] = useState(DUMMY_EXPENSES)
     let price = useRef(); 
     let desc = useRef();
-    let category = useRef();
+    let category = useRef()
+    
+    useEffect(()=>{
+        let datavalue;
+        fetch('https://react-http-ad8cd-default-rtdb.asia-southeast1.firebasedatabase.app/expense.json')
+        .then(res=>{
+            if(res.ok){
+                res.json().then(data=>{const dt = Object.keys(data)
+                    datavalue = dt.map((item)=>{
+                        return data[item]
+                    })
+                    console.log(datavalue)
+                    datavalue.map((item)=>{
+                        return setExp((pre)=>[item,...pre])
+                    }) 
+                })
+            }else{
+                res.json().then(data=>console.log(data))
+            }
+        })
+        
+    },[])
+
 
     const expenseHandler = (e)=>{
         e.preventDefault();
@@ -17,8 +40,22 @@ const Expense = () =>{
             description: desc.current.value,
             Category : catref
         }
-        console.log(obj)
         setExp((pre)=>[obj,...pre])
+        fetch('https://react-http-ad8cd-default-rtdb.asia-southeast1.firebasedatabase.app/expense.json',
+        {
+            method : 'POST',
+            body : JSON.stringify(obj),
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        }
+        ).then(res=>{
+            if(res.ok){
+                res.json().then(data=>console.log(data))
+            }else {
+                res.json().then(data=>alert(data))
+            }
+        })
     }
 
     return <section className='expense-form'>
@@ -35,15 +72,15 @@ const Expense = () =>{
             </select><br></br>
             <button>Submit</button>
         </form>
-            <div>
-                {exp.map((item)=>{
-                    return <div className='expense-list'>
-                            <h3>{item.price}</h3>
-                            <h3>{item.description}</h3>
-                            <h3>{item.Category}</h3>
-                        </div>
+                {exp.map((item,i)=>{
+                    return <ExpenseDisplay
+                            key={i}
+                            price={item.price}
+                            description={item.description}
+                            category={item.Category}
+                        />
                 })}
-            </div>
+           
     </section>
 }
 
