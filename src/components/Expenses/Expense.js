@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import './Expense.css';
-import ExpenseDisplay from './ExpenseDisplay';
 
 let DUMMY_EXPENSES=[];
 
@@ -16,10 +15,10 @@ const Expense = () =>{
         .then(res=>{
             if(res.ok){
                 res.json().then(data=>{const dt = Object.keys(data)
-                    datavalue = dt.map((item)=>{
+                    datavalue = dt.map((item,i)=>{
+                        localStorage.setItem(`${i}`,item)
                         return data[item]
                     })
-                    console.log(datavalue)
                     datavalue.map((item)=>{
                         return setExp((pre)=>[item,...pre])
                     }) 
@@ -35,7 +34,8 @@ const Expense = () =>{
     const expenseHandler = (e)=>{
         e.preventDefault();
         let catref=category.current.value
-        let obj={
+        const obj={
+            id:`E${exp.length}`,
             price:price.current.value,
             description: desc.current.value,
             Category : catref
@@ -57,7 +57,54 @@ const Expense = () =>{
             }
         })
     }
+    const editExpenseHandler = (e) =>{
+        e.preventDefault();
+        let catref=category.current.value
+        const obj={
+            id:`E${exp.length}`,
+            price:price.current.value,
+            description: desc.current.value,
+            Category : catref
+        }
+        setExp((pre)=>[obj,...pre])
+       let id = localStorage.getItem(`${e.target.value}`)
+      console.log(id)
+      fetch(`https://react-http-ad8cd-default-rtdb.asia-southeast1.firebasedatabase.app/expense/${id}.json`,
+        {
+            method : "PUT",
+            body : JSON.stringify(obj),
+            headers : {
+                'Content-Type' : 'application/json'
+            }
+        }
+        ).then(res=>{
+            if(res.ok){
+                res.json().then(data=>console.log(data))
+            }else {
+                res.json().then(data=>alert(data))
+            }
+        })
 
+    }
+    const deleteExpenseHandler = (e) =>{
+        e.preventDefault();
+        let id = localStorage.getItem(`${e.target.value}`);
+       console.log(id)
+       fetch(`https://react-http-ad8cd-default-rtdb.asia-southeast1.firebasedatabase.app/expense/${id}.json`,
+       {
+        method : 'DELETE'
+       }
+       ).then(res=>{
+            if(res.ok){
+                res.json().then(data=>console.log(data))
+                const id= `E${e.target.value}`
+                setExp((pre)=>pre.filter((item)=>item.id!==id))
+            }else{
+                res.json().then(data=>alert('some error occurred', data))
+            }
+        })
+    }
+   
     return <section className='expense-form'>
         <form onSubmit={expenseHandler}>
             <label>Money Spent</label>
@@ -73,12 +120,13 @@ const Expense = () =>{
             <button>Submit</button>
         </form>
                 {exp.map((item,i)=>{
-                    return <ExpenseDisplay
-                            key={i}
-                            price={item.price}
-                            description={item.description}
-                            category={item.Category}
-                        />
+                    return <div className='expense-list'>
+                            <h3>{item.price}</h3>
+                            <h3>{item.Category}</h3>
+                            <h3>{item.description}</h3>
+                            <button onClick={editExpenseHandler} value= {i}>Edit</button>
+                            <button onClick={deleteExpenseHandler} value={i}>Delete</button>
+                        </div>
                 })}
            
     </section>
