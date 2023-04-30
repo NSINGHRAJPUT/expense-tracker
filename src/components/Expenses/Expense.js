@@ -10,12 +10,12 @@ const Expense = () =>{
     let category = useRef()
     
     useEffect(()=>{
-        let datavalue;
+        
         fetch('https://react-http-ad8cd-default-rtdb.asia-southeast1.firebasedatabase.app/expense.json')
         .then(res=>{
             if(res.ok){
                 res.json().then(data=>{const dt = Object.keys(data)
-                    datavalue = dt.map((item,i)=>{
+                    const datavalue = dt.map((item,i)=>{
                         localStorage.setItem(`${i}`,item)
                         return data[item]
                     })
@@ -29,7 +29,6 @@ const Expense = () =>{
         })
         
     },[])
-
 
     const expenseHandler = (e)=>{
         e.preventDefault();
@@ -105,8 +104,8 @@ const Expense = () =>{
         })
     }
    
-    return <section className='expense-form'>
-        <form onSubmit={expenseHandler}>
+    return <div className='container'>
+        <form onSubmit={expenseHandler} className='signup-form'>
             <label>Money Spent</label>
             <input type='number' ref={price}></input><br/>
             <label>Description</label>
@@ -120,16 +119,16 @@ const Expense = () =>{
             <button>Submit</button>
         </form>
                 {exp.map((item,i)=>{
-                    return <div className='expense-list'>
-                            <h3>{item.price}</h3>
-                            <h3>{item.Category}</h3>
-                            <h3>{item.description}</h3>
-                            <button onClick={editExpenseHandler} value= {i}>Edit</button>
+                    return <div className='container display'>
+                            <h3 className='headings'>{item.price}</h3>&nbsp;&nbsp;&nbsp;
+                            <h3 className='headings'>{item.Category}</h3>&nbsp;&nbsp;&nbsp;
+                            <h3 className='headings'>{item.description}</h3>&nbsp;&nbsp;&nbsp;
+                            <button onClick={editExpenseHandler} value= {i}>Edit</button>&nbsp;&nbsp;
                             <button onClick={deleteExpenseHandler} value={i}>Delete</button>
                         </div>
                 })}
            
-    </section>
+    </div>
 }
 
 export default Expense;

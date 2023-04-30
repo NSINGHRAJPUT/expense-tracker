@@ -1,9 +1,7 @@
 import { useRef } from 'react';
-import './PasswordReset.css'
 
 const PasswordReset = () =>{
     const email = useRef();
-
     const passwordHandler = (e) =>{
         e.preventDefault();
         console.log(email.current.value)
@@ -23,12 +21,14 @@ const PasswordReset = () =>{
         .catch(err=>alert(err))
     }
 
-    return <form className='password-form' onSubmit={passwordHandler}>
+    return <div className='container'>
+    <form className='signup-form' onSubmit={passwordHandler}>
         <label>Enter Email Id</label>
         <input type='email' ref={email}></input><br/>
         <button>Reset Password</button>
         {}
     </form>
+    </div>
 }
 
 export default PasswordReset;

@@ -36,3 +36,12 @@ body{
 h2{
     color: blueviolet;
 }
+.additional{
+    background: rgba(0,0,0,0.2);
+    color: blueviolet;
+    border: 2px solid rgb(111, 4, 146);
+    border-radius: 20px;
+    
+    margin-left: 35%;
+    font-weight: 700;
+}

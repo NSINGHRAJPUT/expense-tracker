@@ -1,18 +1,19 @@
 import { useRef } from 'react';
-import './UpdateProfile.css'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { authActions } from '../store/authentication';
 
 const UpdateProfile = () =>{
+    const token = useSelector(state=>state.auth.token)
+    const dispatch = useDispatch();
     const name = useRef();
     const url = useRef();
     const nav = useNavigate();
 
     const profileHandler = (e) =>{
         e.preventDefault();
-        const token=localStorage.getItem('token')
-        console.log(name.current.value,url.current.value)
         fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB6twBfYeAK7PmDAUWyQUGA-ph0S-Qjnq4',
-        {
+        { 
             method: 'POST',
             body : JSON.stringify({
                 idToken:token,
@@ -26,21 +27,20 @@ const UpdateProfile = () =>{
         }
         ).then(res=>res.json())
         .then(data=>{
-            localStorage.setItem('data',JSON.stringify(data))
+            dispatch(authActions.update(data))
             nav('/home')
         })
         .catch(err=>alert(err))
     }
-
-    return <section>
-        <form onSubmit={profileHandler}>
+    return <div className='container'>
+        <form onSubmit={profileHandler} className='signup-form'>
             <label>Full Name</label>
-            <input type='text' ref={name}></input>
+            <input type='text' ref={name}></input><br/>
             <label>Profile Photo URL</label>
             <input type='text' ref={url}></input><br/><br/>
             <button type='submit'>Submit Details</button>
         </form>
-    </section>
+    </div>
 }
 
 export default UpdateProfile;
