@@ -20,3 +20,7 @@
     text-decoration: none;
     font-weight: 700;
 }
+.header .signin{
+    position: relative;
+    right: 1%;
+}

@@ -27,7 +27,6 @@ const authSlice = createSlice({
         varify(state){
             state.isVerified = true;
         },
-        Upassword(){},
         switchHandler(state){
             state.isLogged = ! state.isLogged
         }
