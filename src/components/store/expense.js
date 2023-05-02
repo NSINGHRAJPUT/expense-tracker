@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 
-const initialExpenseState = { expenses:[], totalamount : 0, premium : false, theme : false}
+const initialExpenseState = { expenses:[], totalamount : 0, premium : false, theme : false,itemIndex : []}
 
 const expenseSlice = createSlice({
     name : 'expense',
@@ -13,11 +13,22 @@ const expenseSlice = createSlice({
             if(state.totalamount>10000){
                 state.premium = true;
                 state.theme = true;
-            }else{
+            }
+        },
+        deleteExpense(state,action){
+            state.totalamount = state.totalamount-action.payload.price
+            state.expenses = state.expenses.filter((item)=>item.id!==action.payload.id)
+            if(state.totalamount<10000){
                 state.premium = false;
                 state.theme = false;
             }
         },
+        changeTheme(state){
+            state.theme = ! state.theme
+        },
+        setIndex(state,action){
+            state.itemIndex.push(action.payload)
+        }
     }
 })
 

@@ -24,3 +24,36 @@
     position: relative;
     right: 1%;
 }
+.headers{
+    display: flex;
+    justify-content: space-between;
+    height: 5%;
+    background-color: rgb(2, 41, 2);
+    color: white;
+}
+.headers button{
+    height: 200%;
+    align-items: center;
+    background: rgb(25, 100, 12);
+    color: rgb(1, 1, 1);
+    border: 2px solid rgb(12, 216, 5);
+    border-radius: 20px;
+    position: relative;
+    top: 15px;
+    left: 39%;
+}
+.headers a{
+    position: relative;
+    right: 40%;
+    text-decoration: none;
+    font-weight: 700;
+    color: white;
+}
+.headers .signin{
+    position: relative;
+    right: 1%;
+    color: rgb(255, 255, 255);
+}
+.headers h2{
+    color: white;
+}
